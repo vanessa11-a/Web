@@ -18,7 +18,7 @@ class Usuario(Base):
     email = Column(String(150), unique=True, nullable=False, index=True)
     telefono = Column(String(20))
     documento_identidad = Column(String(50))
-    contrasena_hash = Column(String(255), nullable=False)
+    contrasena_hash = Column(String(255))
     rol_id = Column(Integer, ForeignKey("roles.id_rol"))
     activo = Column(Boolean, default=True)
     fecha_registro = Column(DateTime, default=datetime.utcnow)
