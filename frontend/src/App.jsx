@@ -10,7 +10,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<AdminDashboard />} />
         <Route path="/register" element={<Register />} />
         {isAuthenticated && <Route path="/dashboard" element={<AdminDashboard />} />}
       </Routes>
