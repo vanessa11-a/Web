@@ -1,0 +1,290 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0d0d0f;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+p {
+    color: white;
+}
+
+h4 {
+    color: #ffffff !important;
+}
+
+/* ===== HEADER ===== */
+.main-header {
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff;
+}
+
+.logo-icon {
+    width: 40px;
+    filter: drop-shadow(0 0 6px limegreen);
+}
+
+.header-nav {
+    display: flex;
+    gap: 25px;
+    color: #ffffff;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #00ff9d;
+    transform: scale(1.05);
+}
+
+.btn-logout {
+    background: linear-gradient(90deg, #ff3c3c, #ff6b6b);
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-logout:hover {
+    transform: scale(1.05);
+}
+
+/* ===== CONTENIDO ===== */
+.main-content {
+    padding: 40px;
+}
+
+
+.title-gradient {
+    font-size: 2rem;
+    background: linear-gradient(90deg, #00ff9d, #00bfff);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.stat-card-row {
+    display: flex;
+    gap: 25px;
+    color: #ffffff;
+}
+
+.stat-card {
+    background: #1a1a1d;
+    padding: 20px;
+    border-radius: 12px;
+    flex: 1;
+    text-align: center;
+    box-shadow: 0 0 10px #00ff9d33;
+}
+
+.stat-card span {
+    font-size: 2rem;
+    color: #00ff9d;
+}
+
+/* ===== PAQUETES ===== */
+.package-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 30px;
+}
+
+.package-card {
+    background: #18181b;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    transition: 0.4s;
+    box-shadow: 0 0 12px #00bfff33;
+}
+
+.package-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 15px #00ff9d55;
+}
+
+.package-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.price {
+    color: #00ff9d;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.buy-btn {
+    background: linear-gradient(90deg, #00ff9d, #00bfff);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+/* ===== RESERVAS ===== */
+.reservas-list {
+    background: #1a1a1d;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* ===== PERFIL ===== */
+.perfil-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #1a1a1d;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.perfil-form input {
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+}
+
+.btn-save {
+    background: linear-gradient(90deg, #00bfff, #00ff9d);
+    border: none;
+    padding: 10px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.perfil-msg {
+    margin-top: 10px;
+    color: #00ff9d;
+    font-weight: bold;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background: #111;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+    
+
+/* ...todo el CSS anterior... */
+
+/* ===== TABLA DE RESERVAS ===== */
+.table-container {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.reservas-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1a1a1d;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 12px #00bfff33;
+}
+
+.reservas-table th, .reservas-table td {
+  padding: 12px 10px;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+
+.reservas-table th {
+  background: #111;
+  color: #00ff9d;
+}
+
+.reservas-table tr:hover {
+  background-color: #222;
+}
+
+.estado {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  color: white;
+  text-transform: capitalize;
+}
+
+.estado.confirmada { background-color: #1a7f37; }
+.estado.pendiente  { background-color: #c9a506; color: #000; }
+.estado.cancelada  { background-color: #a11b1b; }
+
+/* ===== PERFIL CENTRADO ===== */
+.perfil-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+/* === FIX PARA LA BARRA BLANCA A LA IZQUIERDA === */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  background-color: #0d0d0f;
+}
+
+#root {
+  width: 100% !important;
+  height: auto;
+}
+
+main.main-content {
+  width: 100% !important;
+  padding: 40px !important;
+  margin: 0 !important;
+}

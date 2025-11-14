@@ -9,8 +9,13 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 # 🔐 CONFIGURACIÓN DEL TOKEN JWT
 # ==============================
 
-JWT_SECRET = config("JWT_SECRET", default="mi_clave_segura_paintball")
-JWT_ALGORITHM = config("JWT_ALGORITHM", default="HS256")
+# Compatibles con dependencies.py
+SECRET_KEY = config("JWT_SECRET", default="mi_clave_segura_paintball")
+ALGORITHM = config("JWT_ALGORITHM", default="HS256")
+
+# Compatibles con tu código previo
+JWT_SECRET = SECRET_KEY
+JWT_ALGORITHM = ALGORITHM
 
 
 def signJWT(user_id: str, rol: int):
@@ -20,9 +25,9 @@ def signJWT(user_id: str, rol: int):
     payload = {
         "sub": str(user_id),
         "rol": rol,
-        "exp": time.time() + 60 * 60 * 4  # Expira en 4 horas
+        "exp": time.time() + 60 * 60 * 24 * 365  # Expira en 1 año
     }
-    token = jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
+    token = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
     return {"access_token": token}
 
 
@@ -31,7 +36,7 @@ def decodeJWT(token: str):
     Decodifica el token JWT y devuelve el contenido
     """
     try:
-        decoded = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        decoded = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         return decoded if decoded["exp"] >= time.time() else None
     except Exception:
         return None
@@ -61,22 +66,17 @@ class JWTBearer(HTTPBearer):
         return bool(payload)
 
 
-
 # ==============================
-# 🔐 HASH Y VERIFICACIÓN DE CONTRASEÑAS
+# 🔐 HASH & VERIFICACIÓN DE CONTRASEÑAS
 # ==============================
 
 def get_password_hash(password: str) -> str:
-    """
-    Genera un hash seguro para almacenar en la base de datos.
-    """
+    """Genera un hash seguro para almacenar."""
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """
-    Verifica si la contraseña ingresada coincide con el hash almacenado.
-    """
+    """Verifica si la contraseña coincide."""
     try:
         return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
     except Exception:

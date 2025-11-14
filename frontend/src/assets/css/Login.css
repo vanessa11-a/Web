@@ -1,266 +1,289 @@
 /* ==== VARIABLES ==== */
 :root {
-  --color-bg: #0b0f19;
-  --color-bg-alt: #101828;
-  --color-primary: #00ff99;
-  --color-secondary: #05b3a4;
-  --color-text: #e2e8f0;
-  --color-accent: #00ffaa;
-  --color-border: #1f2937;
-  --color-hover: #14b8a6;
-  --transition: 0.3s ease-in-out;
-  --shadow: 0 4px 15px rgba(0, 255, 153, 0.15);
-  --radius: 10px;
+    /* Paleta "Contraste Tóxico" aplicada */
+    --color-bg: #0D1117;          /* Negro Carbón (Fondo Principal) */
+    --color-bg-alt: #161B22;      /* Gris Pizarra (Fondo de Tarjetas/Login) */
+    --color-primary: #34D399;     /* Verde Limón Tóxico (Acento Principal/Brillo) */
+    --color-secondary: #06B6D4;   /* Azul Cían (Para degradados y un segundo acento) */
+    --color-text: #C9D1D9;        /* Blanco Roto (Texto Base) */
+    --color-accent: #F87171;      /* Naranja Lava (Alerta/Botones Clave) */
+    --color-border: #2F4F4F;      /* Verde Militar Oscuro para bordes discretos */
+    --color-hover: #4ADE80;       /* Tono más claro de Verde Tóxico para hover */
+    --transition: 0.3s ease-in-out;
+    --shadow: 0 0 20px rgba(52, 211, 153, 0.4); /* Sombra intensa Verde Tóxico */
+    --radius: 10px;
+}
+
+/* --- Base --- */
+body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: Arial, sans-serif;
 }
 
 /* Pantalla de bienvenida */
 .welcome-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--color-bg);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  transition: opacity 1s ease, transform 1s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 1s ease, transform 1s ease;
 }
 
 .welcome-content {
-  text-align: center;
-  max-width: 800px;
-  padding: 20px;
-  position: relative;
-  z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
 }
 
+/* LOGO: Pulso y Brillo Tóxico */
 .logo {
-  width: 150px;
-  height: 150px;
-  background: rgba(0, 255, 153, 0.1);
-  border-radius: 50%;
-  margin: 0 auto 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 70px;
-  animation: pulse 2s infinite, float 6s ease-in-out infinite;
-  box-shadow: 0 0 40px rgba(0, 255, 153, 0.3);
-  color: var(--color-primary);
+    width: 150px;
+    height: 150px;
+    background: rgba(52, 211, 153, 0.15); /* Fondo semitransparente del acento */
+    border-radius: 50%;
+    margin: 0 auto 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 70px;
+    animation: pulse 2s infinite, float 6s ease-in-out infinite;
+    box-shadow: 0 0 40px rgba(52, 211, 153, 0.5); /* Más brillo */
+    color: var(--color-primary);
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 153, 0.4); }
-  70% { transform: scale(1.05); box-shadow: 0 0 0 25px rgba(0, 255, 153, 0); }
-  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 255, 153, 0); }
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 25px rgba(52, 211, 153, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
 }
 
+/* TÍTULO: Degradado de alto impacto */
 .welcome-title {
-  font-size: 70px;
-  font-weight: 800;
-  margin-bottom: 20px;
-  background: linear-gradient(to right, var(--color-primary), var(--color-secondary), var(--color-primary));
-  background-size: 200% auto;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 3s linear infinite, fadeIn 1.5s ease-out;
+    font-size: 70px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    /* Degradado de Verde Tóxico a Azul Cían */
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-primary));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 3s linear infinite, fadeIn 1.5s ease-out;
 }
 
 @keyframes gradientShift {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .welcome-subtitle {
-  font-size: 28px;
-  color: rgba(226, 232, 240, 0.9);
-  margin-bottom: 40px;
-  animation: fadeIn 2s ease-out;
+    font-size: 28px;
+    color: rgba(201, 209, 217, 0.8); /* Usando var(--color-text) con opacidad */
+    margin-bottom: 40px;
+    animation: fadeIn 2s ease-out;
 }
 
 .progress-container {
-  width: 400px;
-  margin: 0 auto;
+    width: 400px;
+    margin: 0 auto;
 }
 
 .progress-text {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: rgba(226, 232, 240, 0.8);
-  animation: fadeIn 2.5s ease-out;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: rgba(201, 209, 217, 0.7);
+    animation: fadeIn 2.5s ease-out;
 }
 
 .progress-bar-custom {
-  width: 100%;
-  height: 10px;
-  background: rgba(226, 232, 240, 0.1);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
+    width: 100%;
+    height: 10px;
+    background: rgba(201, 209, 217, 0.1);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra sutil en la barra */
 }
 
+/* BARRA DE PROGRESO: Usa degradado de la paleta */
 .progress-custom {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
-  border-radius: var(--radius);
-  transition: width 4s ease-in-out;
-  box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+    border-radius: var(--radius);
+    transition: width 4s ease-in-out;
+    box-shadow: 0 0 15px rgba(52, 211, 153, 0.5); /* Brillo Verde Tóxico */
 }
 
 /* Character animations */
 .characters {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
 }
 
+/* BOLAS DE PINTURA FLOTANTES */
 .character {
-  position: absolute;
-  font-size: 60px;
-  animation: bounce 7s ease-in-out infinite;
-  z-index: 1;
-  width: 80px;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background: rgba(0, 255, 153, 0.1);
-  box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+    position: absolute;
+    font-size: 60px;
+    animation: bounce 7s ease-in-out infinite;
+    z-index: 1;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgba(248, 113, 113, 0.15); /* Usando Naranja Lava semitransparente */
+    box-shadow: 0 0 20px rgba(248, 113, 113, 0.3);
+    color: var(--color-accent);
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-30px) rotate(5deg); }
-  50% { transform: translateY(0) rotate(0deg); }
-  75% { transform: translateY(-20px) rotate(-5deg); }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-30px) rotate(5deg); }
+    50% { transform: translateY(0) rotate(0deg); }
+    75% { transform: translateY(-20px) rotate(-5deg); }
 }
 
 /* Floating elements */
 .floating-elements {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
 }
 
+/* ELEMENTOS FLOTANTES DE PINTURA */
 .floating-element {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  background: rgba(0, 255, 153, 0.1);
-  border-radius: 50%;
-  animation: floatAround 20s linear infinite;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: rgba(52, 211, 153, 0.15); /* Verde Tóxico semitransparente */
+    border-radius: 50%;
+    animation: floatAround 20s linear infinite;
+    box-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
 }
 
 @keyframes floatAround {
-  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; border-radius: 50%; }
-  25% { transform: translate(40px, -50px) rotate(90deg); border-radius: 40%; }
-  50% { transform: translate(80px, 0) rotate(180deg); opacity: 0.7; border-radius: 60%; }
-  75% { transform: translate(40px, 50px) rotate(270deg); border-radius: 40%; }
-  100% { transform: translate(0, 0) rotate(360deg); opacity: 1; border-radius: 50%; }
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 1; border-radius: 50%; }
+    25% { transform: translate(40px, -50px) rotate(90deg); border-radius: 40%; }
+    50% { transform: translate(80px, 0) rotate(180deg); opacity: 0.7; border-radius: 60%; }
+    75% { transform: translate(40px, 50px) rotate(270deg); border-radius: 40%; }
+    100% { transform: translate(0, 0) rotate(360deg); opacity: 1; border-radius: 50%; }
 }
 
 /* Login container styles */
 .login-container {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 1s ease, transform 1s ease;
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 1s ease, transform 1s ease;
 }
 
 .login-container.hidden {
-  opacity: 0;
-  transform: scale(0.9);
+    opacity: 0;
+    transform: scale(0.9);
 }
 
+/* TARJETA DE LOGIN: Gris Pizarra con sombra Verde Tóxico */
 .login-card {
-  background: var(--color-bg-alt) !important;
-  border: 1px solid var(--color-border) !important;
-  box-shadow: var(--shadow) !important;
-  border-radius: var(--radius) !important;
-  backdrop-filter: blur(10px);
+    background: var(--color-bg-alt) !important;
+    border: 1px solid var(--color-border) !important;
+    box-shadow: var(--shadow) !important;
+    border-radius: var(--radius) !important;
+    backdrop-filter: blur(10px);
 }
 
+/* TÍTULO DE LOGIN */
 .login-title {
-  background: linear-gradient(to right, var(--color-primary), var(--color-secondary)) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  font-weight: 700 !important;
-  text-shadow: 0 0 15px rgba(0, 255, 153, 0.5) !important;
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-weight: 700 !important;
+    text-shadow: 0 0 15px rgba(52, 211, 153, 0.5) !important;
 }
 
+/* CAMPOS DE FORMULARIO */
 .form-control-custom {
-  background: #0f172a !important;
-  color: #fff !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: var(--radius) !important;
-  transition: var(--transition) !important;
+    background: #0F172A !important; /* Mantenemos un fondo muy oscuro para los inputs */
+    color: var(--color-text) !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius) !important;
+    transition: var(--transition) !important;
 }
 
 .form-control-custom:focus {
-  border-color: var(--color-primary) !important;
-  box-shadow: 0 0 10px rgba(0, 255, 153, 0.2) !important;
-  background: #0f172a !important;
-  color: #fff !important;
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 10px rgba(52, 211, 153, 0.4) !important;
+    background: #0F172A !important;
+    color: var(--color-text) !important;
 }
 
+/* BOTÓN: Fuerte contraste con Naranja Lava */
 .btn-custom {
-  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)) !important;
-  border: none !important;
-  color: #000 !important;
-  font-weight: 600 !important;
-  border-radius: var(--radius) !important;
-  box-shadow: var(--shadow) !important;
-  transition: var(--transition) !important;
-  padding: 12px !important;
+    /* Degradado de Naranja Lava a un tono más profundo */
+    background: linear-gradient(45deg, var(--color-accent), #EF4444) !important;
+    border: none !important;
+    color: var(--color-bg) !important; /* Texto negro sobre el botón de color */
+    font-weight: 700 !important; /* Mayor peso a la fuente */
+    border-radius: var(--radius) !important;
+    box-shadow: 0 4px 15px rgba(248, 113, 113, 0.5) !important; /* Sombra Naranja Lava */
+    transition: var(--transition) !important;
+    padding: 12px !important;
+    text-transform: uppercase;
 }
 
 .btn-custom:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: 0 8px 20px rgba(0, 255, 153, 0.3) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 20px rgba(248, 113, 113, 0.7) !important;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .welcome-title {
-    font-size: 40px;
-  }
-  
-  .welcome-subtitle {
-    font-size: 18px;
-  }
-  
-  .progress-container {
-    width: 300px;
-  }
-  
-  .logo {
-    width: 120px;
-    height: 120px;
-    font-size: 50px;
-  }
-  
-  .character {
-    font-size: 40px;
-    width: 60px;
-    height: 60px;
-  }
+    .welcome-title {
+        font-size: 40px;
+    }
+    
+    .welcome-subtitle {
+        font-size: 18px;
+    }
+    
+    .progress-container {
+        width: 300px;
+    }
+    
+    .logo {
+        width: 120px;
+        height: 120px;
+        font-size: 50px;
+    }
+    
+    .character {
+        font-size: 40px;
+        width: 60px;
+        height: 60px;
+    }
 }

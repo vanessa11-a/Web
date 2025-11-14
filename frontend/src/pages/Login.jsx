@@ -14,21 +14,18 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Animación de la barra de progreso
     const progressInterval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + 2; // Más rápido
+        return prev + 2;
       });
     }, 30);
 
-    // Ocultar pantalla de bienvenida después de 3.5 segundos
     const welcomeTimeout = setTimeout(() => {
       setShowWelcome(false);
-      // Mostrar login inmediatamente después
       setTimeout(() => setShowLogin(true), 100);
     }, 3500);
 
@@ -43,40 +40,48 @@ export default function Login() {
 
     try {
       const res = await api.post('/auth/login', { email, password });
-      localStorage.setItem('token', res.data.access_token);
 
-      // ✅ Mostrar notificación de éxito
-      toast.success('Inicio de sesión exitoso 🎉', {
-        position: 'top-center',
-        autoClose: 1800,
-        style: {
-          backgroundColor: '#0f172a',
-          color: '#00ff99',
-          border: '1px solid #00ff99',
-          boxShadow: '0 0 10px rgba(0,255,153,0.3)',
-        },
+      const token = res.data.access_token;
+
+      // Guardar token
+      localStorage.setItem("token", token);
+
+      // 🔥 DECODIFICAR TOKEN
+      const decoded = JSON.parse(atob(token.split(".")[1]));
+      const rol = decoded.rol;
+
+      // Guardar rol
+      localStorage.removeItem("token");
+      localStorage.removeItem("rol");
+
+      // Guardar todo limpio
+      localStorage.setItem("token", token);
+      localStorage.setItem("rol", String(rol)); // <-- forzarlo a string bien hecho
+
+
+      toast.success("Inicio de sesión exitoso 🎉", {
+        autoClose: 1500
       });
 
-      // Redirigir después de un corto delay
-      setTimeout(() => navigate('/dashboard'), 1800);
-    } catch {
-      // ❌ Mostrar notificación de error
-      toast.error('Correo o contraseña incorrectos ❌', {
-        position: 'top-center',
-        autoClose: 2500,
-        style: {
-          backgroundColor: '#1e293b',
-          color: '#f87171',
-          border: '1px solid #ef4444',
-          boxShadow: '0 0 10px rgba(239,68,68,0.3)',
-        },
-      });
+      setTimeout(() => {
+        if (rol === 1) {
+          window.location.href = "/dashboard";
+        } else if (rol === 2) {
+          window.location.href = "/cliente/inicio";
+        } else {
+          window.location.href = "/login";
+        }
+      }, 1500);
+
+
+    } catch (error) {
+      toast.error("Correo o contraseña incorrectos ❌");
     }
   };
 
+
   return (
     <>
-      {/* Pantalla de Bienvenida */}
       {showWelcome && (
         <div className="welcome-screen">
           <div className="characters">
@@ -85,7 +90,7 @@ export default function Login() {
             <div className="character"> &lt; </div>
             <div className="character"> &gt; </div>
           </div>
-          
+
           <div className="floating-elements">
             <div className="floating-element"></div>
             <div className="floating-element"></div>
@@ -93,18 +98,18 @@ export default function Login() {
             <div className="floating-element"></div>
             <div className="floating-element"></div>
           </div>
-          
+
           <div className="welcome-content">
             <div className="logo">
               <i className='bx bxs-shield'></i>
             </div>
             <h1 className="welcome-title">Bienvenido</h1>
             <p className="welcome-subtitle">Estamos encantados de tenerte con nosotros</p>
-            
+
             <div className="progress-container">
               <div className="progress-text">Cargando experiencia...</div>
               <div className="progress-bar-custom">
-                <div 
+                <div
                   className="progress-custom"
                   style={{ width: `${progress}%` }}
                 ></div>
@@ -114,8 +119,7 @@ export default function Login() {
         </div>
       )}
 
-      {/* Formulario de Login - Siempre en el DOM pero oculto inicialmente */}
-      <div 
+      <div
         className={`login-container d-flex justify-content-center align-items-center ${!showLogin ? 'hidden' : ''}`}
         style={{
           minHeight: '100vh',
@@ -128,16 +132,9 @@ export default function Login() {
         }}
       >
         <Container>
-          <Card
-            className="p-4 mx-auto login-card"
-            style={{
-              maxWidth: '420px',
-            }}
-          >
+          <Card className="p-4 mx-auto login-card" style={{ maxWidth: '420px' }}>
             <Card.Body>
-              <h2 className="text-center mb-4 login-title">
-                Iniciar Sesión
-              </h2>
+              <h2 className="text-center mb-4 login-title">Iniciar Sesión</h2>
 
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
@@ -169,20 +166,17 @@ export default function Login() {
                 </Form.Group>
 
                 <div className="d-grid">
-                  <Button
-                    type="submit"
-                    className="btn-custom"
-                  >
+                  <Button type="submit" className="btn-custom">
                     Entrar
                   </Button>
                 </div>
 
                 <p className="redirect mt-4 text-center" style={{ color: '#94a3b8' }}>
                   ¿No tienes cuenta?{' '}
-                  <Link 
-                    to="/register" 
-                    style={{ 
-                      color: '#00ff99', 
+                  <Link
+                    to="/register"
+                    style={{
+                      color: '#00ff99',
                       textDecoration: 'none',
                       fontWeight: '600'
                     }}

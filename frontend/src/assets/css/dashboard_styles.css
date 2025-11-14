@@ -1,0 +1,124 @@
+/* ==== VARIABLES GLOBALES (Contraste Tóxico) ==== */
+:root {
+    --color-bg: #0D1117;          /* Negro Carbón */
+    --color-bg-alt: #161B22;      /* Gris Pizarra (Sidebar & Cards) */
+    --color-primary: #34D399;     /* Verde Limón Tóxico (Éxito/Acento) */
+    --color-secondary: #06B6D4;   /* Azul Cían (Degradados) */
+    --color-accent: #F87171;      /* Naranja Lava (Alerta/Peligro) */
+    --color-text: #C9D1D9;        /* Blanco Roto */
+    --color-border: #2F4F4F;      /* Verde Militar Oscuro */
+    --color-hover: #4ADE80;       /* Tono más claro de Verde Tóxico para hover */
+    --shadow-primary: 0 0 20px rgba(52, 211, 153, 0.4); 
+    --radius: 10px;
+}
+
+/* === UTILITIES & BASE === */
+
+.admin-layout {
+    background-color: var(--color-bg);
+    min-height: 100vh;
+    color: var(--color-text);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Título con Degradado de Alto Contraste */
+.title-gradient {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(52, 211, 153, 0.3);
+}
+
+/* Botón Naranja Lava (Acción principal/Salir) */
+.btn-lava {
+    background: linear-gradient(45deg, var(--color-accent), #EF4444) !important;
+    border: none !important;
+    color: var(--color-bg) !important; 
+    font-weight: 700 !important; 
+    border-radius: var(--radius) !important;
+    box-shadow: 0 4px 15px rgba(248, 113, 113, 0.5) !important; 
+    transition: all 0.2s ease-in-out;
+    padding: 10px 20px;
+    text-transform: uppercase;
+}
+.btn-lava:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(248, 113, 113, 0.7) !important;
+}
+
+/* === SIDEBAR (Barra Lateral) === */
+
+.sidebar {
+    width: 350px;
+    background: var(--color-bg-alt); /* Gris Pizarra */
+    height: 100vh;
+    /* position: fixed; */
+    box-shadow: 4px 0 15px rgba(0,0,0,0.6);
+    padding: 20px;
+}
+
+.nav-link-custom {
+    color: var(--color-text);
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: var(--radius);
+    transition: 0.2s ease;
+    font-weight: 500;
+}
+.nav-link-custom:hover {
+    background-color: rgba(52, 211, 153, 0.1); 
+    color: var(--color-hover) !important;
+    text-decoration: none;
+}
+.nav-link-custom.active {
+    background: linear-gradient(90deg, var(--color-primary), rgba(52, 211, 153, 0.3));
+    color: var(--color-bg-alt) !important; /* Texto oscuro sobre activo */
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(52, 211, 153, 0.5);
+}
+
+/* === MAIN CONTENT (Contenido Principal) === */
+
+.main-content {
+    margin-left: 240px; /* Offset para la barra lateral fija */
+    padding: 40px;
+    background: var(--color-bg); /* Negro Carbón */
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* === CARDS DE ESTADÍSTICAS === */
+
+.card-alt { 
+    background-color: var(--color-bg-alt) !important; 
+    border: 1px solid var(--color-border) !important;
+    border-radius: 15px !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-alt:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(52, 211, 153, 0.3) !important;
+}
+
+.shadow-toxic-s { 
+    box-shadow: 0 0 10px rgba(52, 211, 153, 0.2) !important; 
+}
+
+/* === RESPONSIVE === */
+
+@media (max-width: 992px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.6); /* Sombra abajo en móvil */
+    }
+    .main-content {
+        margin-left: 0;
+        padding: 20px;
+    }
+    .admin-layout.d-flex {
+        flex-direction: column;
+    }
+}

@@ -1,30 +1,28 @@
 from fastapi import FastAPI
-from .db import Base, engine
-from .routers import auth_router, user_router, admin_router
-
-Base.metadata.create_all(bind=engine)
-
-app = FastAPI(title="Painball API")
-
-from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth_router  # ajusta según tu estructura
+from app.routers import admin_router, auth_router, user_router
+from app.db import engine
+from app import models
+from .routers import compra_router
 
-#app = FastAPI()
 
-# 🔥 Habilitar CORS
+models.Base.metadata.create_all(bind=engine)
+
+app = FastAPI()
+
+# 🔹 CORS para el frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # origen de tu frontend
+    allow_origins=["*"],  # o "http://localhost:5173" si usas Vite
     allow_credentials=True,
-    allow_methods=["*"],  # permite todos los métodos (GET, POST, PUT, DELETE, etc.)
-    allow_headers=["*"],  # permite todos los encabezados
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
+# 🔹 Incluir routers
+app.include_router(admin_router.router)
 app.include_router(auth_router.router)
 app.include_router(user_router.router)
-app.include_router(admin_router.router)
 
-@app.get("/")
-def home():
-    return {"message": "API Painball funcionando correctamente jjj"}
+app.include_router(compra_router.router)
+
