@@ -288,3 +288,9 @@ main.main-content {
   padding: 40px !important;
   margin: 0 !important;
 }
+
+
+.reservas-table th,
+.reservas-table td {
+  color: #ffffff !important;
+}

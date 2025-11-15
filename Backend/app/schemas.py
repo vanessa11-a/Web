@@ -107,3 +107,16 @@ class PagoOut(BaseModel):
     model_config = {
         "from_attributes": True
     }
+
+class ReservaClienteOut(BaseModel):
+    id_reserva: int
+    paquete: str
+    campo: str
+    fecha_reserva: str
+    hora_inicio: str
+    hora_fin: str
+    estado: str
+
+    model_config = {
+        "from_attributes": True
+    }
